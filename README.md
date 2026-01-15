@@ -49,11 +49,23 @@ make build-client
 
 ## 💾 Installation on Device
 
-Copy the agent binary to your Raspberry Pi and use the install script:
+Run this command on your Raspberry Pi / Linux Device:
 
 ```bash
-# Assuming you copied the binary as 'gofindmyarm-agent'
-sudo ./scripts/install.sh --password "SECRET_PASS"
+# Opção 1: Link direto (Sempre atualizado com a main)
+curl -sL https://raw.githubusercontent.com/apavanello/goFindMyArm/main/scripts/install.sh | sudo bash
+
+# Opção 2: Link Curto (Requer GitHub Pages ativado na pasta /docs)
+curl -sL https://apavanello.github.io/goFindMyArm/install | sudo bash
+```
+
+**Options:**
+-   **Disable Remote Commands:** Append `-- --disable-remote`
+-   **Set Password:** Append `-- --password "MY_SECURE_PASS"`
+
+Example:
+```bash
+curl -sL https://raw.githubusercontent.com/apavanello/goFindMyArm/main/scripts/install.sh | sudo bash -s -- --password "admin123"
 ```
 
 ## 🏗️ Architecture
