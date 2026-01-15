@@ -96,13 +96,11 @@ Or in Dev mode:
 make client
 ```
 
-## 🤝 Contributing
+## 🙏 Acknowledgements
 
-1.  Fork the repo
-2.  Create your feature branch (`git checkout -b feature/amazing-feature`)
-3.  Commit your changes (`git commit -m 'Add some amazing feature'`)
-4.  Push to the branch (`git push origin feature/amazing-feature`)
-5.  Open a Pull Request
+*   **SFlow**: Special thanks to [herepoc/sflow](https://github.com/herepoc/sflow) for the incredible AI-driven workflow that powered the development of this project.
+*   **Wails**: For the awesome Go+Vue framework.
+*   **Vue.js & TailwindCSS**: For the frontend magic.
 
 ## 📄 License
 
