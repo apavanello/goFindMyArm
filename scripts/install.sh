@@ -139,7 +139,7 @@ EOF
 
 # 5. Enable & Start
 systemctl daemon-reload
-# systemctl enable --now $SERVICE_NAME (Uncomment to actually start)
+systemctl enable --now $SERVICE_NAME
 
 echo ">>> Installation Complete!"
 if [ "$DISABLE_REMOTE" = false ]; then
