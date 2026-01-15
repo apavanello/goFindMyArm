@@ -13,7 +13,6 @@
 
 # Go
 /vendor/
-go.sum
 *.exe
 *.test
 *.out
