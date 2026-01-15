@@ -86,7 +86,7 @@ fi
 # 3. Download Binary
 # Fetch latest tag from GitHub API
 echo "Fetching latest version info..."
-LATEST_TAG=$(curl -s "https://api.github.com/repos/$REPO/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')
+LATEST_TAG=$(curl -s "https://api.github.com/repos/$REPO/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")' || true)
 
 if [ -z "$LATEST_TAG" ]; then
     echo "Error: Could not find latest release on GitHub."
@@ -95,6 +95,10 @@ if [ -z "$LATEST_TAG" ]; then
 fi
 
 echo "Latest Version: $LATEST_TAG"
+
+echo "--------------------------------------------------"
+echo "Installing goFindMyArm Agent ($LATEST_TAG)"
+echo "--------------------------------------------------"
 
 # Construct URL (e.g. agent-linux-arm64)
 # Note: CI artifact names in ci.yml are like 'bin/agent-linux-arm64'. 

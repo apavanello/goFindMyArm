@@ -82,11 +82,10 @@ elif [ -z "$PASSWORD" ]; then
     fi
 fi
 
-# 3. Download Binary (Mock for now, assumes Release URL structure)
 # 3. Download Binary
 # Fetch latest tag from GitHub API
 echo "Fetching latest version info..."
-LATEST_TAG=$(curl -s "https://api.github.com/repos/$REPO/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')
+LATEST_TAG=$(curl -s "https://api.github.com/repos/$REPO/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")' || true)
 
 if [ -z "$LATEST_TAG" ]; then
     echo "Error: Could not find latest release on GitHub."
@@ -96,13 +95,11 @@ fi
 
 echo "Latest Version: $LATEST_TAG"
 
+echo "--------------------------------------------------"
+echo "Installing goFindMyArm Agent ($LATEST_TAG)"
+echo "--------------------------------------------------"
+
 # Construct URL (e.g. agent-linux-arm64)
-# Note: CI artifact names in ci.yml are like 'bin/agent-linux-arm64'. 
-# GitHub Actions Upload-Artifact usually zips them or leaves them.
-# BUT, usually people upload assets to Release. 
-# My CI currently only uploads to 'Artifacts' (not Releases). 
-# I should warn the user they need a 'Release' workflow or manually create a release.
-# effectively, the script assumes assets are attached to the release.
 BINARY_URL="https://github.com/$REPO/releases/download/$LATEST_TAG/agent-linux-$GOARCH"
 
 echo "Downloading from $BINARY_URL..."
