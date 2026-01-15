@@ -74,6 +74,28 @@ curl -sL https://raw.githubusercontent.com/apavanello/goFindMyArm/main/scripts/i
 -   **Control:** Client connects via gRPC to Agent IP to execute commands.
 -   **Security:** Shared secret (password) used to derive encryption keys and authorize gRPC calls.
 
+## 🔍 Troubleshooting & Logs
+
+### Agent (Linux)
+Since the agent runs as a systemd service, use `journalctl` to view logs:
+```bash
+# View real-time logs
+sudo journalctl -u gofindmyarm -f
+
+# View all logs
+sudo journalctl -u gofindmyarm
+```
+
+### Client (Windows)
+To view logs, run the application from a terminal (PowerShell or CMD) to see the output:
+```powershell
+.\goFindMyArm.exe
+```
+Or in Dev mode:
+```powershell
+make client
+```
+
 ## 🤝 Contributing
 
 1.  Fork the repo

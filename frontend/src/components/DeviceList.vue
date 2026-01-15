@@ -52,9 +52,9 @@ function copyToClipboard(text) {
             <p class="text-xs text-gray-400">{{ device.os }}</p>
         </div>
         
-        <!-- Actions (Context Menu Placeholder) -->
+        <!-- Actions -->
         <div class="mt-4 pt-4 border-t border-gray-50 flex justify-end">
-            <button class="text-sm text-gray-600 hover:text-primary font-medium">Remote > </button>
+            <button @click="$emit('reboot', device.ip)" class="text-sm text-gray-600 hover:text-primary font-medium">Remote > Reboot</button>
         </div>
     </div>
   </div>
@@ -90,7 +90,7 @@ function copyToClipboard(text) {
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ device.mac }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <a href="#" class="text-primary hover:text-purple-900">Remote</a>
+                <button @click="$emit('reboot', device.ip)" class="text-primary hover:text-purple-900">Reboot</button>
             </td>
         </tr>
       </tbody>

@@ -136,6 +136,6 @@ systemctl daemon-reload
 
 echo ">>> Installation Complete!"
 if [ "$DISABLE_REMOTE" = false ]; then
-    echo "Password: $PASSWORD"
+    echo "Remote commands enabled."
 fi
 echo "Run 'systemctl start $SERVICE_NAME' to start."
