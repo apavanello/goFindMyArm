@@ -1,0 +1,68 @@
+name: Build & Release
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-agent:
+    name: Build Agent
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.23'
+
+      - name: Get dependencies
+        run: go mod download
+
+      - name: Build Agent (Linux ARM64)
+        run: env GOOS=linux GOARCH=arm64 go build -ldflags="-s -w" -o bin/agent-linux-arm64 ./cmd/agent
+
+      - name: Build Agent (Linux ARMv7)
+        run: env GOOS=linux GOARCH=arm go build -ldflags="-s -w" -o bin/agent-linux-armv7 ./cmd/agent
+
+      - name: Build Agent (Linux AMD64)
+        run: env GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o bin/agent-linux-amd64 ./cmd/agent
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: agent-binaries
+          path: bin/
+
+  build-client-windows:
+    name: Build Client (Windows)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.23'
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Wails
+        run: go install github.com/wailsapp/wails/v2/cmd/wails@latest
+
+      - name: Build Client
+        shell: pwsh
+        run: |
+           cd cmd/client
+           wails build -platform windows/amd64
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-client
+          path: cmd/client/build/bin/

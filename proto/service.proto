@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package protocol;
+
+option go_package = "github.com/apavanello/goFindMyArm/pkg/protocol";
+
+// DiscoveryPacket is sent via UDP Broadcast (decrypted payload)
+message DiscoveryPacket {
+    string magic_header = 1; // "GFMA_PROBE"
+    bytes nonce = 2; // Nonce used for encryption/reply
+}
+
+// DeviceInfo is the response from the Agent (encrypted)
+message DeviceInfo {
+    string hostname = 1;
+    string ip_address = 2;
+    string mac_address = 3;
+    string os_distro = 4;
+    string kernel_version = 5;
+    string agent_version = 6;
+    bool remote_commands_enabled = 7;
+}
+
+// CommandService defines the gRPC operations
+service CommandService {
+    rpc ExecuteCommand (CommandRequest) returns (CommandResponse);
+    rpc Ping (PingRequest) returns (PingResponse);
+}
+
+message CommandRequest {
+    enum Action {
+        UNKNOWN = 0;
+        REBOOT = 1;
+        UPDATE = 2;
+    }
+    Action action = 1;
+    string args = 2;
+}
+
+message CommandResponse {
+    bool success = 1;
+    string message = 2;
+}
+
+message PingRequest {}
+message PingResponse {
+    string message = 1; // "pong"
+}
