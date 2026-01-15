@@ -100,6 +100,12 @@ echo "--------------------------------------------------"
 echo "Installing goFindMyArm Agent ($LATEST_TAG)"
 echo "--------------------------------------------------"
 
+# Stop service if running to avoid "Text file busy"
+if systemctl is-active --quiet $SERVICE_NAME; then
+    echo "Stopping existing service to update..."
+    systemctl stop $SERVICE_NAME || true
+fi
+
 # Construct URL (e.g. agent-linux-arm64)
 # Note: CI artifact names in ci.yml are like 'bin/agent-linux-arm64'. 
 # GitHub Actions Upload-Artifact usually zips them or leaves them.
