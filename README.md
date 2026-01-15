@@ -56,7 +56,7 @@ Run this command on your Raspberry Pi / Linux Device:
 curl -sL https://raw.githubusercontent.com/apavanello/goFindMyArm/main/scripts/install.sh | sudo bash
 
 # Opção 2: Link Curto (Requer GitHub Pages ativado na pasta /docs)
-curl -sL https://apavanello.github.io/goFindMyArm/install | sudo bash
+curl -sL https://apavanello.github.io/goFindMyArm/install.sh | sudo bash
 ```
 
 **Options:**

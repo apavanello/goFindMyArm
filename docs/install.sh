@@ -63,7 +63,17 @@ elif [ -z "$PASSWORD" ]; then
     else
         # Interactive prompt
         echo -n "Enter password for remote commands: "
-        read -s PASSWORD
+        # Fix for curl | bash: read from /dev/tty
+        if [ -t 0 ]; then
+            read -s PASSWORD
+        else
+            if [ -c /dev/tty ]; then
+                read -s PASSWORD < /dev/tty
+            else
+                echo "Error: Cannot read password (no tty). Use --password or --quiet."
+                exit 1
+            fi
+        fi
         echo
         if [ -z "$PASSWORD" ]; then
              echo "Password cannot be empty!"
