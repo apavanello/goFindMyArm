@@ -8,7 +8,6 @@
 /frontend/src/wailsjs/
 /frontend/node_modules/
 /cmd/client/build/
-/cmd/client/wails.json
 
 
 # Go

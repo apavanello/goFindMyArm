@@ -1,0 +1,14 @@
+{
+  "$schema": "https://wails.io/schemas/config.v2.json",
+  "name": "goFindMyArm",
+  "outputfilename": "goFindMyArm",
+  "frontend:dir": "../../frontend",
+  "wailsjs:dir": "../../frontend/src/wailsjs",
+  "frontend:build": "npm run build",
+  "frontend:dev:watcher": "npm run dev",
+  "frontend:dev:serverUrl": "auto",
+  "author": {
+    "name": "ALEXANDRE PAVANELLO E SILVA",
+    "email": "apavanello@live.com"
+  }
+}
